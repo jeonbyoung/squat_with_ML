@@ -139,3 +139,12 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
         else:
             print("Cannot detect the points on the image.")
             print("Plz check whether the image is for standing pose.")
+
+        return {
+            "femur_lenght_cm" : estimated_femur_len_cm,
+            "torso_lenght_cm" : estimated_torso_len_cm,
+            "tfr_ratio" : tfr_ratio,
+            "selected_side" : selected_side,
+            "scale_factor" : scale_factor
+            
+        }
