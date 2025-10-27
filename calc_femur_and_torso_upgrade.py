@@ -40,7 +40,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             L_shoulder = landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value]
             L_hip = landmarks[mp_pose.PoseLandmark.LEFT_HIP.value]
             L_knee = landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value]
-            L_heel = landmarks[mp.pose.PoseLandmark.LEFT_HEEL.value]
+            L_heel = landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value]
 
             L_shoulder_vis = L_shoulder.visibility
             L_hip_vis = L_hip.visibility
@@ -53,7 +53,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             R_shoulder = landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value]
             R_hip = landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value]
             R_knee = landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value]
-            R_heel = landmarks[mp.pose.PoseLandmark.RIGHT_HEEL.value]
+            R_heel = landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value]
 
             R_shoulder_vis = R_shoulder.visibility
             R_hip_vis = R_hip.visibility
