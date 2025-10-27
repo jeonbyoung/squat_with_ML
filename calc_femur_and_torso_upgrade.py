@@ -22,6 +22,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
     R_is_reliable = False
 
     scale_factor = 1.0
+    selected_side = "none"
 
     if img is None:
         print(f"'{img_path}' is not detected. plz check the file name")
@@ -39,7 +40,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             L_shoulder = landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value]
             L_hip = landmarks[mp_pose.PoseLandmark.LEFT_HIP.value]
             L_knee = landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value]
-            L_heel = landmarks[mp.pose.PoseLandmarks.LEFT_HEEL.value]
+            L_heel = landmarks[mp.pose.PoseLandmark.LEFT_HEEL.value]
 
             L_shoulder_vis = L_shoulder.visibility
             L_hip_vis = L_hip.visibility
@@ -52,7 +53,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             R_shoulder = landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value]
             R_hip = landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value]
             R_knee = landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value]
-            R_heel = landmarks[mp.pose.PoseLandmarks.RIGHT_HEEL.value]
+            R_heel = landmarks[mp.pose.PoseLandmark.RIGHT_HEEL.value]
 
             R_shoulder_vis = R_shoulder.visibility
             R_hip_vis = R_hip.visibility
@@ -79,7 +80,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             if(R_shoulder_vis>vis_threshold and
             R_hip_vis>vis_threshold and
             R_knee_vis>vis_threshold and 
-            L_heel_vis>vis_threshold):
+            R_heel_vis>vis_threshold):
                 R_is_vis = True
 
             if(L_is_vis or R_is_vis):
@@ -91,6 +92,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             
                 elif((L_is_vis and R_is_vis != True) or select_L):
                     print("Left side is selected.")
+                    selected_side = "Left"
                     #The Key Value!
                     #femur length = hip ~ knee
                     femur_length = calc_dist_3d(L_hip,L_knee)
@@ -102,6 +104,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
 
                 elif((R_is_vis and L_is_vis != True) or select_R):
                     print("Right side is selected.")
+                    selected_side = "Right"
                     #The Key Value!
                     #femur length = hip ~ knee
                     femur_length = calc_dist_3d(R_hip,R_knee)
@@ -141,8 +144,8 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
             print("Plz check whether the image is for standing pose.")
 
         return {
-            "femur_lenght_cm" : estimated_femur_len_cm,
-            "torso_lenght_cm" : estimated_torso_len_cm,
+            "femur_length_cm" : estimated_femur_len_cm,
+            "torso_length_cm" : estimated_torso_len_cm,
             "tfr_ratio" : tfr_ratio,
             "selected_side" : selected_side,
             "scale_factor" : scale_factor
