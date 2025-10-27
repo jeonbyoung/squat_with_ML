@@ -62,7 +62,7 @@ def calc_femur_and_torso_upgrade(img_path, actual_height_cm):
 
             R_vis_avg = (R_shoulder_vis+R_hip_vis+R_knee_vis+R_heel_vis)/4.0
 
-            nose = landmarks[mp.pose.PoseLandmarks.NOSE.value]
+            nose = landmarks[mp_pose.PoseLandmark.NOSE.value]
             model_height_3d = -1
 
             vis_threshold = 0.8
